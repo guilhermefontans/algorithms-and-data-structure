@@ -1,0 +1,23 @@
+{
+    "name": "fontans/algorithms-and-data-structure",
+    "authors": [
+        {
+            "name": "Guilherme Fontans",
+            "email": "guilherme.fontans@gmail.com"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^8.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Algorithms\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    }
+}
