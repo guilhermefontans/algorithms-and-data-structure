@@ -1,18 +1,21 @@
 {
     "name": "fontans/algorithms-and-data-structure",
+    "description": "This is a reporitory to me study algorithms and data structure",
     "authors": [
         {
             "name": "Guilherme Fontans",
             "email": "guilherme.fontans@gmail.com"
         }
     ],
+    "license": "MIT",
     "require": {
         "fabpot/php-cs-fixer": "^2.16"
     },
     "require-dev": {
         "phpunit/phpunit": "^8.5",
         "phpstan/phpstan": "^0.12.32",
-        "nunomaduro/phpinsights": "^1.14"
+        "nunomaduro/phpinsights": "^1.14",
+        "friendsofphp/php-cs-fixer": "^2.16"
     },
     "autoload": {
         "psr-4": {

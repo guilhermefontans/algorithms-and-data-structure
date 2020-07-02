@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Search;
 
 use Algorithms\Search\BinarySearch;
@@ -7,6 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * Class BinarySearchTest
+ *
  * @package Tests\Search
  */
 class BinarySearchTest extends TestCase
@@ -14,7 +17,8 @@ class BinarySearchTest extends TestCase
     /**
      *
      */
-    public function testSearch() {
+    public function testSearch(): void
+    {
         $array = [3, 6, 8, 13, 35, 56, 78, 89, 92, 95];
 
         $binarySearch = new BinarySearch();

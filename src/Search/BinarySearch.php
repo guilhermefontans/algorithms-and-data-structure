@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Algorithms\Search;
 
 /**
@@ -10,14 +12,14 @@ namespace Algorithms\Search;
 class BinarySearch
 {
     /**
-     * @param array $array
-     * @param int $x
+     * @param  array<int> $array
+     * @param  int        $x
      * @return float|int
      */
     public function search(array $array, int $x)
     {
         $left = 0;
-        $right = count($array) -1;
+        $right = count($array) - 1;
 
         while ($left <= $right) {
             $mid = $left + (ceil(($right - $left) / 2));
@@ -27,7 +29,7 @@ class BinarySearch
             }
 
             if ($x < $array[$mid]) {
-                $right = $mid -1;
+                $right = $mid - 1;
             } else {
                 $left = $mid + 1;
             }
