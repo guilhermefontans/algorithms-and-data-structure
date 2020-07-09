@@ -13,7 +13,7 @@ class QuickSort
 {
     /**
      * @param  array<int> $array
-     * @return array<int>
+     * @return array<int|string, int|null>
      */
     public function sort(array $array): array
     {
@@ -21,12 +21,12 @@ class QuickSort
             return $array;
         }
 
-        $pivot = $this->parseStringToBigInt(array_shift($array));
-        $arrayLeft = $arrayRight = [];
+        $pivot       = array_shift($array);
+        $arrayLeft   = $arrayRight = [];
         $centerArray = [$pivot];
 
         foreach ($array as $item) {
-            $currentElement = $this->parseStringToBigInt($item);
+            $currentElement = $item;
 
             if ($currentElement === $pivot) {
                 array_push($centerArray, $currentElement);
@@ -37,21 +37,9 @@ class QuickSort
             }
         }
 
-        $leftArraySorted = $this->sort($arrayLeft);
+        $leftArraySorted  = $this->sort($arrayLeft);
         $rightArraySorted = $this->sort($arrayRight);
 
         return array_merge($leftArraySorted, $centerArray, $rightArraySorted);
-    }
-
-    /**
-     * @param $string
-     * @return \GMP|resource
-     */
-    private function parseStringToBigInt($string)
-    {
-        if (! is_string($string)) {
-            return $string;
-        }
-        return \gmp_init($string);
     }
 }
