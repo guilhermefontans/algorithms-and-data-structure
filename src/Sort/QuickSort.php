@@ -12,7 +12,7 @@ namespace Algorithms\Sort;
 class QuickSort
 {
     /**
-     * @param  array<int> $array
+     * @param  array<int>        $array
      * @return array<int|string, int|null>
      */
     public function sort(array $array): array
@@ -21,8 +21,8 @@ class QuickSort
             return $array;
         }
 
-        $pivot       = array_shift($array);
-        $arrayLeft   = $arrayRight = [];
+        $pivot = array_shift($array);
+        $arrayLeft = $arrayRight = [];
         $centerArray = [$pivot];
 
         foreach ($array as $item) {
@@ -37,7 +37,7 @@ class QuickSort
             }
         }
 
-        $leftArraySorted  = $this->sort($arrayLeft);
+        $leftArraySorted = $this->sort($arrayLeft);
         $rightArraySorted = $this->sort($arrayRight);
 
         return array_merge($leftArraySorted, $centerArray, $rightArraySorted);
