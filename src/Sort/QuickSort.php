@@ -12,23 +12,22 @@ namespace Algorithms\Sort;
 class QuickSort
 {
     /**
-     * @param array<int> $originalArray
+     * @param  array<int> $array
      * @return array<int>
      */
-    public function sort(array $originalArray): array
+    public function sort(array $array): array
     {
-        $array = $originalArray;
         if (count($array) <= 1) {
             return $array;
         }
 
-        $pivot = array_shift($array);
-        $arrayLeft = [];
-        $arrayRight = [];
+        $pivot = $this->parseStringToBigInt(array_shift($array));
+        $arrayLeft = $arrayRight = [];
         $centerArray = [$pivot];
 
-        while (count($array)) {
-            $currentElement = array_shift($array);
+        foreach ($array as $item) {
+            $currentElement = $this->parseStringToBigInt($item);
+
             if ($currentElement === $pivot) {
                 array_push($centerArray, $currentElement);
             } elseif ($currentElement < $pivot) {
@@ -42,5 +41,17 @@ class QuickSort
         $rightArraySorted = $this->sort($arrayRight);
 
         return array_merge($leftArraySorted, $centerArray, $rightArraySorted);
+    }
+
+    /**
+     * @param $string
+     * @return \GMP|resource
+     */
+    private function parseStringToBigInt($string)
+    {
+        if (! is_string($string)) {
+            return $string;
+        }
+        return \gmp_init($string);
     }
 }
