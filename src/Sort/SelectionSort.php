@@ -26,9 +26,9 @@ class SelectionSort
                 }
             }
 
-            $aux = $array[$i];
-            $array[$i] = $array[$minIndex];
-            $array[$minIndex] = $aux;
+            if ($minIndex != $i) {
+                [$array[$i], $array[$minIndex]] = [$array[$minIndex], $array[$i]];
+            }
         }
         return $array;
     }
