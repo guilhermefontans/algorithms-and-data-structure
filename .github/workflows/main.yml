@@ -27,7 +27,7 @@ jobs:
         run: ./vendor/bin/phpinsights --no-interaction --min-quality=90 --min-architecture=90 --min-style=90
 
       - name: Running PHPStan
-        run: ./vendor/bin/phpstan analyse src tests --level 8
+        run: ./vendor/bin/phpstan analyse src tests
 
       - name: Running PHPUnit
         run: ./vendor/bin/phpunit tests/
