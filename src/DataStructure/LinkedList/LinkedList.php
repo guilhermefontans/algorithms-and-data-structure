@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace Algorithms\DataStructure\LinkedList;
 
 /**
@@ -29,13 +28,13 @@ class LinkedList
 
     /**
      * @param  int   $data
-     * @return $this
+     * @return void
      */
-    public function append(int $data)
+    public function append(int $data): void
     {
         if (is_null($this->head)) {
             $this->head = new Node($data);
-            return $this;
+            return;
         }
 
         /** @var Node $current */
@@ -46,5 +45,15 @@ class LinkedList
         }
 
         $current->next = new Node($data);
+    }
+
+    /**
+     * @param int $data
+     */
+    public function prepend(int $data): void
+    {
+        $nextHead = new Node($data);
+        $nextHead->next = $this->head;
+        $this->head = $nextHead;
     }
 }
