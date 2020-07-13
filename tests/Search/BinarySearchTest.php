@@ -24,7 +24,7 @@ class BinarySearchTest extends TestCase
         $binarySearch = new BinarySearch();
 
         $key = $binarySearch->search($array, 78);
-        $this->assertEquals(6, $key);
+        $this->assertEquals(7, $key);
 
         $key = $binarySearch->search($array, 5);
         $this->assertEquals(-1, $key);
