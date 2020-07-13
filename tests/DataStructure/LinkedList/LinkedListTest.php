@@ -38,4 +38,33 @@ class LinkedListTest extends TestCase
         $this->assertNull($linkedList->head->next->next->next);
         $this->assertInstanceOf(Node::class, $linkedList->head->next);
     }
+
+    public function testDelete(): void
+    {
+        $linkedList = new LinkedList();
+        $linkedList->append(20);
+        $linkedList->prepend(10);
+        $linkedList->append(40);
+
+        $this->assertEquals(10, $linkedList->head->value);
+        $this->assertEquals(40, $linkedList->head->next->next->value);
+
+        $linkedList->delete(10);
+        $this->assertEquals(20, $linkedList->head->value);
+    }
+
+    public function testFind(): void
+    {
+        $linkedList = new LinkedList();
+
+        $this->assertNull($linkedList->find(30));
+
+        $linkedList->append(20);
+        $linkedList->prepend(10);
+        $linkedList->append(40);
+
+        $this->assertEquals(20, $linkedList->find(20)->value);
+        $this->assertInstanceOf(Node::class, $linkedList->find(10));
+        $this->assertNull($linkedList->find(30));
+    }
 }
