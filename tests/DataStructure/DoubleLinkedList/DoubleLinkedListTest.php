@@ -26,4 +26,20 @@ class DoubleLinkedListTest extends TestCase
         $this->assertEquals(10, $linkedList->tail->previous->previous->value);
         $this->assertNull($linkedList->head->next->next->next);
     }
+
+    public function testDelete(): void
+    {
+        $linkedList = new DoubleLinkedList();
+        $linkedList->append(10);
+        $this->assertEquals(10, $linkedList->head->value);
+        $this->assertEquals(10, $linkedList->tail->value);
+        $linkedList->append(20);
+        $linkedList->append(30);
+        $linkedList->append(40);
+
+        $this->assertEquals(10, $linkedList->head->value);
+        $this->assertEquals(20, $linkedList->head->next->value);
+        $linkedList->delete(20);
+        $this->assertEquals(10, $linkedList->head->next->previous->value);
+    }
 }
