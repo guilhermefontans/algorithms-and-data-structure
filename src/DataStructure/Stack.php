@@ -7,43 +7,38 @@ namespace Algorithms\DataStructure;
 use Algorithms\DataStructure\LinkedList\LinkedList;
 
 /**
- * Class Queue
+ * Class Stack
+ *
  * @package Algorithms\DataStructure
  */
-class Queue
+class Stack
 {
     /**
      * @var LinkedList
      */
-    private $linkedList;
+    protected $linkedList;
 
     public function __construct()
     {
         $this->linkedList = new LinkedList();
     }
 
-    /**
-     * @return int|null
-     */
-    public function peek(): ?int
+    public function peek()
     {
         if (is_null($this->linkedList->head)) {
             return null;
         }
+
         return $this->linkedList->head->value;
     }
 
-
-    public function dequeue(): void
+    public function push(int $data): void
     {
-        $this->linkedList->deleteHead();
+        $this->linkedList->prepend($data);
     }
 
-    /**
-     * @param int $data
-     */
-    public function enqueue(int $data): void
+    public function pop(): void
     {
-        $this->linkedList->append($data);
+        $this->linkedList->deleteHead();
     }
 }

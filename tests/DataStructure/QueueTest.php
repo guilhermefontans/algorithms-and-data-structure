@@ -14,6 +14,9 @@ use PHPUnit\Framework\TestCase;
  */
 class QueueTest extends TestCase
 {
+    /**
+     * @var Queue
+     */
     protected $queue;
 
     public function setUp(): void
