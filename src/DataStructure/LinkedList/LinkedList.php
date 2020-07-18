@@ -17,13 +17,19 @@ class LinkedList
     public $head;
 
     /**
+     * @var Node
+     */
+    public $tail;
+
+    /**
      * LinkedList constructor.
      *
      * @param Node|null $head
      */
-    public function __construct($head = null)
+    public function __construct($head = null, $tail = null)
     {
         $this->head = $head;
+        $this->tail = $tail;
     }
 
     /**
@@ -32,19 +38,16 @@ class LinkedList
      */
     public function append(int $data): void
     {
+        $newNode = new Node($data);
+
         if (is_null($this->head)) {
-            $this->head = new Node($data);
+            $this->head = $newNode;
+            $this->tail = $newNode;
             return;
         }
 
-        /** @var Node $current */
-        $current = $this->head;
-
-        while (! is_null($current->next)) {
-            $current = $current->next;
-        }
-
-        $current->next = new Node($data);
+        $this->tail->next = $newNode;
+        $this->tail = $newNode;
     }
 
     /**
@@ -52,9 +55,13 @@ class LinkedList
      */
     public function prepend(int $data): void
     {
-        $nextHead = new Node($data);
-        $nextHead->next = $this->head;
-        $this->head = $nextHead;
+        $newNode = new Node($data);
+        $newNode->next = $this->head;
+        $this->head = $newNode;
+
+        if (is_null($this->tail)) {
+            $this->tail = $newNode;
+        }
     }
 
     /**
@@ -95,6 +102,10 @@ class LinkedList
         $current = $this->head;
 
         while (is_null($current->next)) {
+            if ($this->tail->value == $value) {
+                $this->tail = $current;
+            }
+
             if ($current->next->value == $value) {
                 $current->next = $current->next->next;
                 return;
