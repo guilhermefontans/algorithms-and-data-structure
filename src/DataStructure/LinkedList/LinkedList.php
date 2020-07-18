@@ -24,7 +24,8 @@ class LinkedList
     /**
      * LinkedList constructor.
      *
-     * @param Node|null $head
+     * @param null $head
+     * @param null $tail
      */
     public function __construct($head = null, $tail = null)
     {
@@ -112,5 +113,45 @@ class LinkedList
             }
             $current = $current->next;
         }
+    }
+
+    public function deleteHead()
+    {
+        if (is_null($this->head)) {
+            return null;
+        }
+
+        $deletedHead = $this->head;
+        if ($this->head->next) {
+            $this->head = $this->head->next;
+        } else {
+            $this->head = null;
+            $this->tail = null;
+        }
+
+        return $deletedHead;
+    }
+
+    public function deleteTail()
+    {
+        $deletedTail = $this->tail;
+
+        if ($this->tail === $this->head) {
+            $this->head = null;
+            $this->tail = null;
+
+            return $deletedTail;
+        }
+
+        $current = $this->head;
+        while (! is_null($current->next)) {
+            if (is_null($current->next->next)) {
+                $current->next = null;
+            } else {
+                $current = $current->next;
+            }
+        }
+        $this->tail = $current;
+        return $deletedTail;
     }
 }

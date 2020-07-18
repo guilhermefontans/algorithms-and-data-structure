@@ -19,11 +19,40 @@ class LinkedListTest extends TestCase
     {
         $linkedList = new LinkedList();
         $linkedList->append(10);
+        $linkedList->append(20);
         $linkedList->append(30);
 
         $this->assertEquals(10, $linkedList->head->value);
-        $this->assertEquals(30, $linkedList->head->next->value);
-        $this->assertNull($linkedList->head->next->next);
+        $this->assertEquals(30, $linkedList->tail->value);
+        $this->assertNull($linkedList->head->next->next->next);
+    }
+
+    public function testDeleteTail(): void
+    {
+        $linkedList = new LinkedList();
+        $linkedList->append(10);
+        $linkedList->append(20);
+        $linkedList->append(30);
+
+        $this->assertEquals(10, $linkedList->head->value);
+        $this->assertEquals(30, $linkedList->tail->value);
+
+        $linkedList->deleteTail();
+        $this->assertEquals(20, $linkedList->tail->value);
+    }
+
+    public function testDeleteHead(): void
+    {
+        $linkedList = new LinkedList();
+        $linkedList->append(10);
+        $linkedList->append(20);
+        $linkedList->append(30);
+
+        $this->assertEquals(10, $linkedList->head->value);
+        $this->assertEquals(30, $linkedList->tail->value);
+
+        $linkedList->deleteHead();
+        $this->assertEquals(20, $linkedList->head->value);
     }
 
     public function testPrepend(): void
