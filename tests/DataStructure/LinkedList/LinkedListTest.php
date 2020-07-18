@@ -15,85 +15,111 @@ use PHPUnit\Framework\TestCase;
  */
 class LinkedListTest extends TestCase
 {
-    public function testAppend(): void
-    {
-        $linkedList = new LinkedList();
-        $linkedList->append(10);
-        $linkedList->append(20);
-        $linkedList->append(30);
+    /**
+     * @var LinkedList
+     */
+    protected $linkedList;
 
-        $this->assertEquals(10, $linkedList->head->value);
-        $this->assertEquals(30, $linkedList->tail->value);
-        $this->assertNull($linkedList->head->next->next->next);
+    public function setUp(): void
+    {
+        $this->linkedList = new LinkedList();
+    }
+
+    public function testHeadAndTailWillBeNullInAnEmptyLinkedList(): void
+    {
+        $this->assertNull($this->linkedList->head);
+        $this->assertNull($this->linkedList->tail);
+    }
+
+    public function testAppendInLinkedList(): void
+    {
+        $this->linkedList->append(10);
+        $this->linkedList->append(30);
+
+        $this->assertEquals(10, $this->linkedList->head->value);
+        $this->assertEquals(30, $this->linkedList->tail->value);
+        $this->assertNull($this->linkedList->head->next->next);
     }
 
     public function testDeleteTail(): void
     {
-        $linkedList = new LinkedList();
-        $linkedList->append(10);
-        $linkedList->append(20);
-        $linkedList->append(30);
+        $this->linkedList->append(10);
+        $this->linkedList->append(20);
+        $this->linkedList->append(30);
 
-        $this->assertEquals(10, $linkedList->head->value);
-        $this->assertEquals(30, $linkedList->tail->value);
+        $this->assertEquals(10, $this->linkedList->head->value);
+        $this->assertEquals(30, $this->linkedList->tail->value);
 
-        $linkedList->deleteTail();
-        $this->assertEquals(20, $linkedList->tail->value);
+        $this->linkedList->deleteTail();
+        $this->assertEquals(20, $this->linkedList->tail->value);
     }
 
     public function testDeleteHead(): void
     {
-        $linkedList = new LinkedList();
-        $linkedList->append(10);
-        $linkedList->append(20);
-        $linkedList->append(30);
+        $this->linkedList->append(10);
+        $this->linkedList->append(20);
+        $this->linkedList->append(30);
 
-        $this->assertEquals(10, $linkedList->head->value);
-        $this->assertEquals(30, $linkedList->tail->value);
+        $this->assertEquals(10, $this->linkedList->head->value);
+        $this->assertEquals(30, $this->linkedList->tail->value);
 
-        $linkedList->deleteHead();
-        $this->assertEquals(20, $linkedList->head->value);
+        $this->linkedList->deleteHead();
+        $this->assertEquals(20, $this->linkedList->head->value);
     }
 
-    public function testPrepend(): void
+    public function testPrePendInLinkedList(): void
     {
-        $linkedList = new LinkedList();
-        $linkedList->append(20);
-        $linkedList->prepend(10);
-        $linkedList->append(40);
+        $this->linkedList->append(20);
+        $this->linkedList->prepend(10);
+        $this->linkedList->append(40);
 
-        $this->assertEquals(10, $linkedList->head->value);
-        $this->assertEquals(40, $linkedList->head->next->next->value);
-        $this->assertNull($linkedList->head->next->next->next);
-        $this->assertInstanceOf(Node::class, $linkedList->head->next);
+        $this->assertEquals(10, $this->linkedList->head->value);
+        $this->assertEquals(40, $this->linkedList->tail->value);
+        $this->assertNull($this->linkedList->head->next->next->next);
+        $this->assertInstanceOf(Node::class, $this->linkedList->head->next);
     }
 
-    public function testDelete(): void
+    public function testDeleteWillReorganizeHeadInLinkedList(): void
     {
-        $linkedList = new LinkedList();
-        $linkedList->append(20);
-        $linkedList->prepend(10);
-        $linkedList->append(40);
+        $this->linkedList->append(20);
+        $this->linkedList->prepend(10);
+        $this->linkedList->append(30);
+        $this->linkedList->append(40);
+        $this->linkedList->append(50);
 
-        $this->assertEquals(10, $linkedList->head->value);
-        $this->assertEquals(40, $linkedList->head->next->next->value);
+        $this->assertEquals(10, $this->linkedList->head->value);
+        $this->assertEquals(50, $this->linkedList->tail->value);
 
-        $linkedList->delete(10);
-        $this->assertEquals(20, $linkedList->head->value);
+        $this->linkedList->delete(10);
+        $this->assertEquals(20, $this->linkedList->head->value);
     }
 
-    public function testFind(): void
+    public function testDeleteWillReorganizeTailInLinkedList(): void
     {
-        $linkedList = new LinkedList();
+        $this->linkedList->append(10);
+        $this->linkedList->append(20);
+        $this->linkedList->append(30);
 
-        $this->assertNull($linkedList->find(30));
+        $this->assertEquals(10, $this->linkedList->head->value);
+        $this->assertEquals(30, $this->linkedList->tail->value);
 
-        $linkedList->append(20);
-        $linkedList->prepend(10);
-        $linkedList->append(40);
+        $this->linkedList->delete(30);
+        $this->assertEquals(20, $this->linkedList->tail->value);
+    }
 
-        $this->assertEquals(20, $linkedList->find(20)->value);
-        $this->assertInstanceOf(Node::class, $linkedList->find(10));
-        $this->assertNull($linkedList->find(30));
+
+    public function testFindWillReturnNullWhenNotFoundData(): void
+    {
+        $this->assertNull($this->linkedList->find(30));
+    }
+
+    public function testFindWillReturnTheNodeRequested(): void
+    {
+        $this->linkedList->append(10);
+        $this->linkedList->append(20);
+        $this->linkedList->append(30);
+
+        $this->assertEquals(20, $this->linkedList->find(20)->value);
+        $this->assertInstanceOf(Node::class, $this->linkedList->find(10));
     }
 }
