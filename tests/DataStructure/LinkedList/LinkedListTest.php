@@ -107,7 +107,6 @@ class LinkedListTest extends TestCase
         $this->assertEquals(20, $this->linkedList->tail->value);
     }
 
-
     public function testFindWillReturnNullWhenNotFoundData(): void
     {
         $this->assertNull($this->linkedList->find(30));
