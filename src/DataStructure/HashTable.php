@@ -29,20 +29,41 @@ class HashTable
         $this->keys = [];
     }
 
-    public function has()
+    /**
+     * @param $key
+     * @return bool
+     */
+    public function has($key)
     {
-        return false;
-        
+        return isset($this->keys[$key]);
     }
 
     public function set($key, $value)
     {
+        $hash = $this->generateHash($key);
+        $this->keys[$key] = $hash;
 
+        /**
+         * @var LinkedList $bucketLinkedList
+         */
+        $bucketLinkedList = $this->buckets[$hash];
+        $node = $bucketLinkedList->find($value);
+
+        if (! $node) {
+            $object = new \stdClass();
+            $object->key = $key;
+            $object->value = $value;
+            $bucketLinkedList->append($object);
+        } else {
+            $node->value->value = $value;
+        }
     }
 
     public function get($key)
     {
-        
+        $bucketLinkedList = $this->buckets[$this->generateHash($key)];
+        $node = $bucketLinkedList->find(null, fn($node) => $node->key === $key);
+        return $node ? $node->value->value : null;
     }
 
     public function delete($key)
@@ -55,8 +76,13 @@ class HashTable
         return $this->keys;
     }
 
+    /**
+     * @param $key
+     * @return int
+     */
     private function generateHash($key)
     {
-        return md5($key) % count($this->buckets);
+        //it's temporary
+        return (12345 . $key)  % count($this->buckets);
     }
 }

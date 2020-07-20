@@ -15,16 +15,16 @@ class Node
     public $next;
 
     /**
-     * @var int
+     * @var
      */
     public $value;
 
     /**
      * Node constructor.
      *
-     * @param int $value
+     * @param $value
      */
-    public function __construct(int $value)
+    public function __construct($value)
     {
         $this->value = $value;
     }

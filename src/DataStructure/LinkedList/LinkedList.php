@@ -34,10 +34,9 @@ class LinkedList
     }
 
     /**
-     * @param  int  $data
-     * @return void
+     * @param $data
      */
-    public function append(int $data): void
+    public function append($data): void
     {
         $newNode = new Node($data);
 
@@ -66,10 +65,10 @@ class LinkedList
     }
 
     /**
-     * @param  int       $value
+     * @param $value
      * @return Node|null
      */
-    public function find(int $value): ?Node
+    public function find($value = null,  $callback = null): ?Node
     {
         if (is_null($this->head)) {
             return null;
@@ -77,6 +76,10 @@ class LinkedList
 
         $current = $this->head;
         while (! is_null($current)) {
+            if ($callback && $callback($current->value)) {
+                return $current;
+            }
+
             if ($current->value == $value) {
                 return $current;
             }
@@ -87,10 +90,9 @@ class LinkedList
     }
 
     /**
-     * @param  int  $value
-     * @return void
+     * @param $value
      */
-    public function delete(int $value): void
+    public function delete($value): void
     {
         if (is_null($this->head)) {
             return;
