@@ -61,7 +61,7 @@ class DoubleLinkedList
         $current = $this->head;
 
         while (! is_null($current)) {
-            if ($current->value == $value) {
+            if ($current->value === $value) {
                 $deletedNode = $current;
 
                 if ($deletedNode === $this->head) {

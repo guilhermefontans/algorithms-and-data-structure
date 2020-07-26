@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Algorithms\DataStructure;
 
 use Algorithms\DataStructure\LinkedList\LinkedList;
@@ -14,7 +16,7 @@ class HashTable
     public $buckets;
 
     /**
-     * @var array 
+     * @var array
      */
     public $keys;
 
@@ -33,12 +35,12 @@ class HashTable
      * @param $key
      * @return bool
      */
-    public function has($key)
+    public function has($key): bool
     {
         return isset($this->keys[$key]);
     }
 
-    public function set($key, $value)
+    public function set($key, $value): void
     {
         $hash = $this->generateHash($key);
         $this->keys[$key] = $hash;
@@ -62,13 +64,13 @@ class HashTable
     public function get($key)
     {
         $bucketLinkedList = $this->buckets[$this->generateHash($key)];
-        $node = $bucketLinkedList->find(null, fn($node) => $node->key === $key);
+        $function = fn ($node) => $node->key === $key;
+        $node = $bucketLinkedList->find(null, $function);
         return $node ? $node->value->value : null;
     }
 
-    public function delete($key)
+    public function delete($key): void
     {
-
     }
 
     public function getKeys()
@@ -80,9 +82,9 @@ class HashTable
      * @param $key
      * @return int
      */
-    private function generateHash($key)
+    private function generateHash($key): int
     {
         //it's temporary
-        return (12345 . $key)  % count($this->buckets);
+        return (12345 . $key) % count($this->buckets);
     }
 }

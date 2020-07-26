@@ -26,7 +26,7 @@ class SelectionSort
                 }
             }
 
-            if ($minIndex != $i) {
+            if ($minIndex !== $i) {
                 [$array[$i], $array[$minIndex]] = [$array[$minIndex], $array[$i]];
             }
         }

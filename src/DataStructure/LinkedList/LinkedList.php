@@ -68,7 +68,7 @@ class LinkedList
      * @param $value
      * @return Node|null
      */
-    public function find($value = null,  $callback = null): ?Node
+    public function find($value = null, $callback = null): ?Node
     {
         if (is_null($this->head)) {
             return null;
@@ -80,7 +80,7 @@ class LinkedList
                 return $current;
             }
 
-            if ($current->value == $value) {
+            if ($current->value === $value) {
                 return $current;
             }
             $current = $current->next;
@@ -89,30 +89,27 @@ class LinkedList
         return null;
     }
 
-    /**
-     * @param $value
-     */
     public function delete($value): void
     {
         if (is_null($this->head)) {
             return;
         }
 
-        if ($this->head->value == $value) {
+        if ($this->head->value === $value) {
             $this->head = $this->head->next;
         }
 
         $current = $this->head;
 
         while (! is_null($current->next)) {
-            if ($current->next->value == $value) {
+            if ($current->next->value === $value) {
                 $current->next = $current->next->next;
             } else {
                 $current = $current->next;
             }
         }
 
-        if ($this->tail->value == $value) {
+        if ($this->tail->value === $value) {
             $this->tail = $current;
         }
     }

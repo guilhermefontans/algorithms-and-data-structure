@@ -22,9 +22,6 @@ class Queue
         $this->linkedList = new LinkedList();
     }
 
-    /**
-     * @return int|null
-     */
     public function peek(): ?int
     {
         if (is_null($this->linkedList->head)) {
@@ -39,9 +36,6 @@ class Queue
         $this->linkedList->deleteHead();
     }
 
-    /**
-     * @param int $data
-     */
     public function enqueue(int $data): void
     {
         $this->linkedList->append($data);

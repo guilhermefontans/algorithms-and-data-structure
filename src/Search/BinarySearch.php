@@ -12,8 +12,8 @@ namespace Algorithms\Search;
 class BinarySearch
 {
     /**
-     * @param  array<int> $array
-     * @param  int        $x
+     * @param  array     $array
+     * @param  int       $x
      * @return float|int
      */
     public function search(array $array, int $x)
@@ -24,7 +24,7 @@ class BinarySearch
         while ($left <= $right) {
             $mid = $left + (ceil(($right - $left) / 2));
 
-            if ($array[$mid] == $x) {
+            if ($array[$mid] === $x) {
                 return $mid;
             }
 
