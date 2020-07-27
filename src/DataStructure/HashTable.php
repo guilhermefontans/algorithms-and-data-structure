@@ -49,7 +49,8 @@ class HashTable
          * @var LinkedList $bucketLinkedList
          */
         $bucketLinkedList = $this->buckets[$hash];
-        $node = $bucketLinkedList->find($value);
+        $function = $this->getArrowFunctionToFind($key);
+        $node = $bucketLinkedList->find(null, $function);
 
         if (! $node) {
             $object = new \stdClass();
@@ -64,13 +65,27 @@ class HashTable
     public function get($key)
     {
         $bucketLinkedList = $this->buckets[$this->generateHash($key)];
-        $function = fn ($node) => $node->key === $key;
+        $function = $this->getArrowFunctionToFind($key);
         $node = $bucketLinkedList->find(null, $function);
         return $node ? $node->value->value : null;
     }
 
-    public function delete($key): void
+    public function delete($key)
     {
+        $hash = $this->generateHash($key);
+        unset($this->keys[$key]);
+        /**
+         * @var LinkedList $bucketLinkedList
+         */
+        $bucketLinkedList = $this->buckets[$hash];
+        $function = $this->getArrowFunctionToFind($key);
+        $node = $bucketLinkedList->find(null, $function);
+
+        if ($node) {
+            return $bucketLinkedList->delete($node->value->value);
+        }
+
+        return null;
     }
 
     public function getKeys()
@@ -86,5 +101,10 @@ class HashTable
     {
         //it's temporary
         return (12345 . $key) % count($this->buckets);
+    }
+
+    private function getArrowFunctionToFind($key)
+    {
+        return fn ($node) => $node->key === $key;
     }
 }

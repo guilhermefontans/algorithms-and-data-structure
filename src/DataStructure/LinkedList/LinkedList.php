@@ -101,7 +101,7 @@ class LinkedList
 
         $current = $this->head;
 
-        while (! is_null($current->next)) {
+        while ($current->next) {
             if ($current->next->value === $value) {
                 $current->next = $current->next->next;
             } else {
