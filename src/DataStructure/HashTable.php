@@ -99,8 +99,11 @@ class HashTable
      */
     private function generateHash($key): int
     {
-        //it's temporary
-        return (12345 . $key) % count($this->buckets);
+        $arrayCharacteres = str_split((string) $key);
+        $hash = array_reduce($arrayCharacteres, function ($carry, $charactere) {
+            return $carry .= ord($charactere);
+        });
+        return $hash % count($this->buckets);
     }
 
     private function getArrowFunctionToFind($key)
