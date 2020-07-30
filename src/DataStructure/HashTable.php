@@ -13,6 +13,11 @@ use Algorithms\DataStructure\LinkedList\LinkedList;
  */
 class HashTable
 {
+    public const TABLE_SIZE = 32;
+
+    /**
+     * @var array
+     */
     public $buckets;
 
     /**
@@ -27,7 +32,7 @@ class HashTable
      */
     public function __construct()
     {
-        $this->buckets = [new LinkedList(), new LinkedList(), new LinkedList(), new LinkedList(), new LinkedList()];
+        $this->buckets = array_fill(0, self::TABLE_SIZE, new LinkedList());
         $this->keys = [];
     }
 
