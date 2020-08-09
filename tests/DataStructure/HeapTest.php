@@ -13,15 +13,36 @@ use PHPUnit\Framework\TestCase;
  */
 class HeapTest extends TestCase
 {
+    /**
+     * @var Heap
+     */
+    private $heap;
 
-    public function testHeap()
+    public function setUp(): void
     {
-        //$heap = new Heap();
+        $this->heap = new Heap();
+    }
 
-        //$heap->add(10);
-        //$heap->add(15);
+    public function testIfHeapWillReplaceHeadWhenLesserNumberIsAdded()
+    {
+        $this->heap->add(10);
+        $this->heap->add(15);
+        $this->heap->add(20);
+        $this->heap->add(17);
+        $this->heap->add(8);
 
+        $this->assertEquals(8, $this->heap->peek());
+    }
 
-        //print_r($heap);
+    public function testIfHeapWillActualizeHeadWhenTheIndexIsRemoved()
+    {
+        $this->heap->add(10);
+        $this->heap->add(15);
+        $this->heap->add(20);
+        $this->heap->add(17);
+
+        $this->heap->pool();
+
+        $this->assertEquals(15, $this->heap->peek());
     }
 }
