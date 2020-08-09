@@ -94,13 +94,11 @@ class LinkedList
         if (is_null($this->head)) {
             return;
         }
-
         if ($this->head->value === $value) {
             $this->head = $this->head->next;
         }
 
         $current = $this->head;
-
         while ($current->next) {
             if ($current->next->value === $value) {
                 $current->next = $current->next->next;

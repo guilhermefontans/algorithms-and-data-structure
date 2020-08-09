@@ -9,7 +9,7 @@ namespace Algorithms\Sort;
  *
  * @package Algorithms\Sort
  */
-class QuickSort
+final class QuickSort
 {
     /**
      * @param  array<int>        $array

@@ -9,7 +9,7 @@ namespace Algorithms\Sort;
  *
  * @package Algorithms\Sort
  */
-class BubbleSort
+final class BubbleSort
 {
     /**
      * @param  array<int> $array

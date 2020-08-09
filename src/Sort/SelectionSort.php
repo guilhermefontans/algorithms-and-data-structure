@@ -9,7 +9,7 @@ namespace Algorithms\Sort;
  *
  * @package Algorithms\Sort
  */
-class SelectionSort
+final class SelectionSort
 {
     /**
      * @param  array<int> $array

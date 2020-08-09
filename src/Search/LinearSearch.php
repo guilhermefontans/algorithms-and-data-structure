@@ -11,8 +11,6 @@ namespace Algorithms\Search;
 class LinearSearch
 {
     /**
-     * @param  array $array
-     * @param  int   $needle
      * @return int
      */
     public function search(array $array, int $needle): int

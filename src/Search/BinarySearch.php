@@ -12,8 +12,6 @@ namespace Algorithms\Search;
 class BinarySearch
 {
     /**
-     * @param  array     $array
-     * @param  int       $x
      * @return float|int
      */
     public function search(array $array, int $x)

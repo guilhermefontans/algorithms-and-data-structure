@@ -9,7 +9,7 @@ namespace Algorithms\Sort;
  *
  * @package Algorithms\Sort
  */
-class InsertionSort
+final class InsertionSort
 {
     /**
      * @var array<int>
