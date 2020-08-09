@@ -102,7 +102,7 @@ class Heap
      */
     private function getLeftChild(int $index): int
     {
-        return $this->items[$this->getLeftChild($index)];
+        return $this->items[$this->getLeftChildIndex($index)];
     }
 
     /**
@@ -111,7 +111,7 @@ class Heap
      */
     private function getRightChild(int $index): int
     {
-        return $this->items[$this->getRightChild($index)];
+        return $this->items[$this->getRightChildIndex($index)];
     }
 
     /**
