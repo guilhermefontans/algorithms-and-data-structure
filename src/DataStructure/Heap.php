@@ -97,7 +97,7 @@ class Heap
     }
 
     /**
-     * @param int $index
+     * @param  int $index
      * @return int
      */
     private function getLeftChild(int $index): int
@@ -106,7 +106,7 @@ class Heap
     }
 
     /**
-     * @param  int   $index
+     * @param  int $index
      * @return int
      */
     private function getRightChild(int $index): int

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 
 namespace Tests\DataStructure;
 
@@ -23,7 +25,7 @@ class HeapTest extends TestCase
         $this->heap = new Heap();
     }
 
-    public function testIfHeapWillReplaceHeadWhenLesserNumberIsAdded()
+    public function testIfHeapWillReplaceHeadWhenLesserNumberIsAdded(): void
     {
         $this->heap->add(10);
         $this->heap->add(15);
@@ -34,7 +36,7 @@ class HeapTest extends TestCase
         $this->assertEquals(8, $this->heap->peek());
     }
 
-    public function testIfHeapWillActualizeHeadWhenTheIndexIsRemoved()
+    public function testIfHeapWillActualizeHeadWhenTheIndexIsRemoved(): void
     {
         $this->heap->add(10);
         $this->heap->add(15);
