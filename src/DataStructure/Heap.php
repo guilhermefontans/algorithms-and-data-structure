@@ -96,7 +96,7 @@ class Heap
      */
     private function getParentIndex(int $childIndex)
     {
-        return floor(($childIndex - 1) / 2);
+        return (int)floor(($childIndex - 1) / 2);
     }
 
     /**
@@ -123,7 +123,7 @@ class Heap
      */
     private function getParent(int $index)
     {
-        return $this->items[$this->getParent($index)];
+        return $this->items[$this->getParentIndex($index)];
     }
 
     /**
