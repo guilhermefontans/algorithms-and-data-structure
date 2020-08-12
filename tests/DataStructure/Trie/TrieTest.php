@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\DataStructure\Trie;
 
-use Algorithms\DataStructure\Trie\TrieNode;
+use Algorithms\DataStructure\Trie\Trie;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -14,10 +14,25 @@ use PHPUnit\Framework\TestCase;
  */
 class TrieTest extends TestCase
 {
-    const HEAD_CHARACTER = "*";
+    /**
+     * @var Trie
+     */
+    private $trie;
 
-    public function __construct()
+    public function setUp(): void
     {
-        $this->head = new TrieNode(self::HEAD_CHARACTER);
+        $this->trie = new Trie();
+    }
+
+    public function testAddWordInTrie(): void
+    {
+        $this->trie->addWord("car");
+        $this->trie->addWord("cat");
+        $this->trie->addWord("cart");
+
+        $this->assertTrue($this->trie->doesWordExist('car'));
+        $this->assertTrue($this->trie->doesWordExist('cat'));
+        $this->assertTrue($this->trie->doesWordExist('cart'));
+        $this->assertFalse($this->trie->doesWordExist('carrot'));
     }
 }

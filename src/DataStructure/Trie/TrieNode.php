@@ -89,4 +89,9 @@ final class TrieNode
     {
         return $this->children->has($character);
     }
+
+    public function isCompletedWord()
+    {
+        return $this->isCompletedWord;
+    }
 }
