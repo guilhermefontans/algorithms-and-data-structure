@@ -80,18 +80,36 @@ final class TrieNode
         }
     }
 
-    public function hasChildren()
+    /**
+     * @return bool
+     */
+    public function hasChildren(): bool
     {
         return count($this->children->getKeys()) !== 0;
     }
 
-    public function hasChild($character)
+    /**
+     * @param $character
+     * @return bool
+     */
+    public function hasChild($character): bool
     {
         return $this->children->has($character);
     }
 
-    public function isCompletedWord()
+    /**
+     * @return bool
+     */
+    public function isCompletedWord(): bool
     {
         return $this->isCompletedWord;
+    }
+
+    /**
+     * @param bool $isCompletedWord
+     */
+    public function setIsCompletedWord(bool $isCompletedWord): void
+    {
+        $this->isCompletedWord = $isCompletedWord;
     }
 }

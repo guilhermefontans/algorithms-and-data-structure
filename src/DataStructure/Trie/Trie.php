@@ -53,4 +53,37 @@ class Trie
         }
         return $currentNode;
     }
+
+    public function deleteWord($word)
+    {
+        $this->depthFirstDelete($this->head, 0, $word);
+        return $this;
+    }
+
+    /**
+     * @param TrieNode $currentNode
+     * @param int      $charIndex
+     * @param string   $word
+     */
+    public function depthFirstDelete(TrieNode $currentNode, int $charIndex, string $word): void
+    {
+        if ($charIndex >= strlen($word)) {
+            return;
+        }
+
+        $character = $word[$charIndex];
+        $nextNode = $currentNode->getChild($character);
+
+        if (is_null($nextNode)) {
+            return;
+        }
+
+        $this->depthFirstDelete($nextNode, $charIndex + 1, $word);
+
+        if ($charIndex === strlen($word) - 1) {
+            $nextNode->setIsCompletedWord(false);
+        }
+
+        $currentNode->removeChild($character);
+    }
 }

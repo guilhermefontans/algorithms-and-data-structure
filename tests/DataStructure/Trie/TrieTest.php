@@ -22,17 +22,22 @@ class TrieTest extends TestCase
     public function setUp(): void
     {
         $this->trie = new Trie();
+        $this->trie->addWord("car");
+        $this->trie->addWord("cat");
+        $this->trie->addWord("cart");
     }
 
     public function testAddWordInTrie(): void
     {
-        $this->trie->addWord("car");
-        $this->trie->addWord("cat");
-        $this->trie->addWord("cart");
-
         $this->assertTrue($this->trie->doesWordExist('car'));
         $this->assertTrue($this->trie->doesWordExist('cat'));
         $this->assertTrue($this->trie->doesWordExist('cart'));
         $this->assertFalse($this->trie->doesWordExist('carrot'));
+    }
+
+    public function testDeleteWordInTrie(): void
+    {
+        $this->trie->deleteWord('cart');
+        $this->assertFalse($this->trie->doesWordExist('cart'));
     }
 }
