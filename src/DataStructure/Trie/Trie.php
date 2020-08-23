@@ -13,6 +13,8 @@ class Trie
 {
     const HEAD_CHARACTER = '*';
 
+    private $head;
+
     public function __construct()
     {
         $this->head = new TrieNode(self::HEAD_CHARACTER);
