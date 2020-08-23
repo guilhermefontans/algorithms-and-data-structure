@@ -40,4 +40,10 @@ class TrieTest extends TestCase
         $this->trie->deleteWord('cart');
         $this->assertFalse($this->trie->doesWordExist('cart'));
     }
+
+    public function testSuggestNextCharacters(): void
+    {
+        $this->assertEquals(["r", "t"], $this->trie->suggestNextCharacter("ca"));
+        $this->assertNull($this->trie->suggestNextCharacter("cap"));
+    }
 }

@@ -11,7 +11,7 @@ namespace Algorithms\DataStructure\Trie;
  */
 class Trie
 {
-    const HEAD_CHARACTER = "*";
+    const HEAD_CHARACTER = '*';
 
     public function __construct()
     {
@@ -33,25 +33,7 @@ class Trie
     public function doesWordExist(string $word)
     {
         $lastCharacter = $this->getLastCharacterNode($word);
-        return ! ! $lastCharacter && $lastCharacter->isCompletedWord();
-    }
-
-    /**
-     * @param  string        $word
-     * @return TrieNode|null
-     */
-    private function getLastCharacterNode(string $word): ?TrieNode
-    {
-        $characteres = str_split($word);
-        $currentNode = $this->head;
-
-        for ($charIndex = 0; $charIndex < strlen($word); $charIndex++) {
-            if (! $currentNode->hasChild($characteres[$charIndex])) {
-                return null;
-            }
-            $currentNode = $currentNode->getChild($characteres[$charIndex]);
-        }
-        return $currentNode;
+        return (bool) $lastCharacter && $lastCharacter->isCompletedWord();
     }
 
     public function deleteWord($word)
@@ -85,5 +67,34 @@ class Trie
         }
 
         $currentNode->removeChild($character);
+    }
+
+    public function suggestNextCharacter($word)
+    {
+        $lastCharacter = $this->getLastCharacterNode($word);
+
+        if (! $lastCharacter) {
+            return null;
+        }
+
+        return $lastCharacter->suggestChildren();
+    }
+
+    /**
+     * @param  string        $word
+     * @return TrieNode|null
+     */
+    private function getLastCharacterNode(string $word): ?TrieNode
+    {
+        $characteres = str_split($word);
+        $currentNode = $this->head;
+
+        for ($charIndex = 0; $charIndex < strlen($word); $charIndex++) {
+            if (! $currentNode->hasChild($characteres[$charIndex])) {
+                return null;
+            }
+            $currentNode = $currentNode->getChild($characteres[$charIndex]);
+        }
+        return $currentNode;
     }
 }

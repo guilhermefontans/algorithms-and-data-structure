@@ -55,7 +55,9 @@ final class TrieNode
 
         /** @var TrieNode $childNode */
         $childNode = $this->children->get($character);
-        $childNode->isCompletedWord = $childNode->isCompletedWord ?: $isCompletedWord;
+        $childNode->isCompletedWord = $childNode->isCompletedWord
+            ?:
+            $isCompletedWord;
 
         return $childNode;
     }
@@ -70,6 +72,9 @@ final class TrieNode
         return $this->children->get($character);
     }
 
+    /**
+     * @param $character
+     */
     public function removeChild($character): void
     {
         /** @var TrieNode $childNode */
@@ -90,6 +95,7 @@ final class TrieNode
 
     /**
      * @param $character
+     *
      * @return bool
      */
     public function hasChild($character): bool
@@ -111,5 +117,26 @@ final class TrieNode
     public function setIsCompletedWord(bool $isCompletedWord): void
     {
         $this->isCompletedWord = $isCompletedWord;
+    }
+
+    public function suggestChildren()
+    {
+        return array_keys($this->children->getKeys());
+    }
+
+    public function toString()
+    {
+        $childrenAsString = implode(',', $this->suggestChildren());
+        $childrenAsString = $childrenAsString ? ":{$childrenAsString}" : '';
+        $isCompleteString = $this->isCompletedWord ? '*' : '';
+        return $this->character . $isCompleteString . $childrenAsString;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCharacter(): string
+    {
+        return $this->character;
     }
 }
