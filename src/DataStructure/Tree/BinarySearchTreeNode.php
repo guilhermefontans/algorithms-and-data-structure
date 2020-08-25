@@ -14,7 +14,7 @@ use Algorithms\DataStructure\HashTable;
 class BinarySearchTreeNode
 {
     /**
-     * @var null
+     * @var BinarySearchTreeNode|null
      */
     private $value;
 
@@ -34,11 +34,6 @@ class BinarySearchTreeNode
     private $right;
 
     /**
-     * @var HashTable
-     */
-    private $meta;
-
-    /**
      * BinarySearchTreeNode constructor.
      *
      * @param null $value
@@ -49,8 +44,6 @@ class BinarySearchTreeNode
         $this->right = null;
         $this->parent = null;
         $this->value = $value;
-
-        $this->meta = new HashTable();
     }
 
     public function getLeftHeight()
@@ -136,6 +129,38 @@ class BinarySearchTreeNode
             $this->setRight($newNode);
             return $newNode;
         }
+    }
+
+    public function find($value)
+    {
+        if ($value === $this->getValue()) {
+            return $this;
+        }
+
+        if ($value < $this->getValue()) {
+            return $this->left->find($value);
+        }
+
+        if ($value > $this->getValue()) {
+            return $this->right->find($value);
+        }
+
+        return null;
+    }
+
+    public function removeChild(BinarySearchTreeNode $nodeToRemove)
+    {
+        if (! is_null($this->left && $this->left === $nodeToRemove)) {
+            $this->left = null;
+            return true;
+        }
+
+        if (! is_null($this->right && $this->right === $nodeToRemove)) {
+            $this->right = null;
+            return true;
+        }
+
+        return false;
     }
 
     /**

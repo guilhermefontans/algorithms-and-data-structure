@@ -11,7 +11,7 @@ namespace Algorithms\DataStructure\Trie;
  */
 class Trie
 {
-    const HEAD_CHARACTER = '*';
+    private const HEAD_CHARACTER = '*';
 
     private $head;
 
