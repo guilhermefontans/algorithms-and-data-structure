@@ -24,7 +24,7 @@ jobs:
           composer install --dev --no-ansi --no-interaction --no-suggest --prefer-dist
 
       - name: Running PHPInsights
-        run: ./vendor/bin/phpinsights --no-interaction --min-quality=85 --min-architecture=85 --min-style=85
+        run: ./vendor/bin/phpinsights --no-interaction --min-quality=85 --min-architecture=80 --min-style=85
 
       - name: Running PHPStan
         run: ./vendor/bin/phpstan analyse src tests

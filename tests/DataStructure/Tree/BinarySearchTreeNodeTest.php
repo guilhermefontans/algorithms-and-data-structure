@@ -36,12 +36,41 @@ class BinarySearchTreeNodeTest extends TestCase
         $this->assertEquals(1, $this->bsTreeNode->getLeft()->getValue());
     }
 
-    public function testFindInTreeNode()
+    public function testRemove(): void
+    {
+        $this->bsTreeNode->insert(15);
+        $this->bsTreeNode->insert(10);
+        $this->bsTreeNode->insert(16);
+        $this->bsTreeNode->insert(18);
+
+        $this->bsTreeNode->remove(16);
+        $this->assertEquals("1, 2, 3, 10, 15, 18", $this->bsTreeNode->toString());
+    }
+
+    public function testTraverseInOrder(): void
+    {
+        $this->bsTreeNode->insert(15);
+        $this->bsTreeNode->insert(4);
+        $this->bsTreeNode->insert(17);
+        $this->bsTreeNode->insert(32);
+        $this->bsTreeNode->insert(8);
+
+        $this->assertEquals([1, 2, 3, 4, 8, 15, 17, 32], $this->bsTreeNode->traverseInOrder());
+    }
+
+    public function testToString(): void
+    {
+        $this->bsTreeNode->insert(32);
+        $this->bsTreeNode->insert(18);
+        $this->assertEquals("1, 2, 3, 18, 32", $this->bsTreeNode->toString());
+    }
+
+    public function testFindInTreeNode(): void
     {
         $this->assertEquals(2, $this->bsTreeNode->find(2)->getValue());
     }
 
-    public function testRemoveChild()
+    public function testRemoveChild(): void
     {
         $nodeToRemove = $this->bsTreeNode->find(1);
         $this->assertTrue($this->bsTreeNode->removeChild($nodeToRemove));

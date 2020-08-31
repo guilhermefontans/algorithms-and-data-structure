@@ -163,12 +163,114 @@ class BinarySearchTreeNode
         return false;
     }
 
+    public function remove($value)
+    {
+        $nodeToRemove = $this->find($value);
+
+        if (is_null($nodeToRemove)) {
+            return false;
+        }
+
+        $parent = $nodeToRemove->getParent();
+
+        if (is_null($nodeToRemove->getLeft()) && is_null($nodeToRemove->getRight())) {
+            if ($parent) {
+                $parent->removeChild($nodeToRemove);
+            } else {
+                $nodeToRemove->setValue(null);
+            }
+        } elseif (! is_null($nodeToRemove->getLeft()) && ! is_null($nodeToRemove->getRight())) {
+            $nextBiggerNode = $nodeToRemove->getRight()->findMin();
+
+            if ($nextBiggerNode !== $nodeToRemove->getRight()) {
+                $this->remove($nextBiggerNode->getValue());
+                $nodeToRemove->setValue($nextBiggerNode->getValue());
+            } else {
+                $nodeToRemove->setValue($nodeToRemove->getRight()->getValue());
+                $nodeToRemove->setRight($nodeToRemove->getRight()->getRight());
+            }
+        } else {
+            $childNode = $nodeToRemove->getLeft() ?: $nodeToRemove->getRight();
+
+            if ($parent) {
+                $parent->replaceChild($nodeToRemove, $childNode);
+            } else {
+                $this->copyNode($childNode, $nodeToRemove);
+            }
+        }
+
+        $nodeToRemove->parent = null;
+        return true;
+    }
+
+    public function copyNode(BinarySearchTreeNode $sourceNode, BinarySearchTreeNode $targetNode): void
+    {
+        $targetNode->setValue($sourceNode->getValue());
+        $targetNode->setLeft($sourceNode->getLeft());
+        $targetNode->setRight($sourceNode->getRight());
+    }
+
+    public function findMin()
+    {
+        if (! $this->left) {
+            return $this;
+        }
+
+        return $this->left->findMin();
+    }
+
+    public function replaceChild($nodeToReplace, $replacementNode)
+    {
+        if (! $nodeToReplace || ! $replacementNode) {
+            return false;
+        }
+
+        if ($this->left && $this->left === $nodeToReplace) {
+            $this->left = $replacementNode;
+            return true;
+        }
+
+        if ($this->right && $this->right === $nodeToReplace) {
+            $this->right = $replacementNode;
+            return true;
+        }
+        return false;
+    }
+
+    public function traverseInOrder()
+    {
+        $traverse = [];
+        if ($this->left) {
+            $traverse = array_merge($traverse, $this->getLeft()->traverseInOrder());
+        }
+
+        $traverse[] = $this->value;
+
+        if ($this->right) {
+            $traverse = array_merge($traverse, $this->getRight()->traverseInOrder());
+        }
+        return $traverse;
+    }
+
+    public function toString()
+    {
+        return implode(',', $this->traverseInOrder());
+    }
+
     /**
      * @return null
      */
     public function getValue()
     {
         return $this->value;
+    }
+
+    /**
+     * @param BinarySearchTreeNode|null $value
+     */
+    public function setValue(?BinarySearchTreeNode $value): void
+    {
+        $this->value = $value;
     }
 
     /**
