@@ -254,7 +254,7 @@ class BinarySearchTreeNode
 
     public function toString()
     {
-        return implode(',', $this->traverseInOrder());
+        return implode(', ', $this->traverseInOrder());
     }
 
     /**
