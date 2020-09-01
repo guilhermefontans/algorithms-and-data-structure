@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Algorithms\DataStructure\Tree;
 
 /**
@@ -58,11 +60,11 @@ class BinarySearchTreeNode extends BinaryTreeNode
             return $this;
         }
 
-        if ($value < $this->getValue()) {
+        if (! is_null($this->left) && $value < $this->getValue()) {
             return $this->left->find($value);
         }
 
-        if ($value > $this->getValue()) {
+        if (! is_null($this->right) && $value > $this->getValue()) {
             return $this->right->find($value);
         }
 
@@ -107,6 +109,11 @@ class BinarySearchTreeNode extends BinaryTreeNode
 
         $nodeToRemove->parent = null;
         return true;
+    }
+
+    public function contains($value)
+    {
+        return (bool) $this->find($value);
     }
 
     public function findMin()
